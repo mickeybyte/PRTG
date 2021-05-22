@@ -41,7 +41,7 @@ try {
             "NOT_RESPONDING" { $status = 2 }
             "UNKOWN" { $status = 3 }
         }
-        $csr.addChannel("$name Status", $status)
+        $csr.addChannel("$name Status", $status, @{ValueLookup="prtg.standardlookups.horizon.status";HideChart=$true;Primary=$true})
         
         # # connections
         $csr.addChannel("$name Connections", $cs.connection_count)
@@ -53,7 +53,7 @@ try {
                 "OK" { $replstatus = 0 }
                 "ERROR" { $replstatus = 1 }
             }
-            $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus)
+            $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus, @{ValueLookup="prtg.standardlookups.horizon.replstatus";HideChart=$true})
         }
 
 
@@ -69,6 +69,6 @@ try {
 }
 catch {
     $msg = "Errors occured while retrieving data from $HVUrl. Please check if all parameters are correct." 
-    $csr.Error($msg)
+    $csr.Error("$msg | $_")
     write-host $csr.result()
 }
