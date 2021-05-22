@@ -19,7 +19,7 @@ param (
 )
 
 # Import scripts containing general functions and classes
-#   !Make sure the files are placed in the subfolder relative to this script!
+#   !Make sure the files are placed in the subfolder relative to this script or adjust the path here!
 . "$PSScriptRoot\Horizon-Functions.ps1"
 . "$PSScriptRoot\PRTG-CSR\PRTG-CSRClass.ps1"
 
