@@ -19,7 +19,7 @@ param (
 )
 
 # Import scripts containing general functions and classes
-#   !Make sure the files are placed in the subfolder relative to this script!
+#   !Make sure the files are placed in the subfolder relative to this script or adjust the path here!
 . "$PSScriptRoot\Horizon-Functions.ps1"
 . "$PSScriptRoot\PRTG-CSR\PRTG-CSRClass.ps1"
 
@@ -31,7 +31,7 @@ try {
     # Get API Access Token
     $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
     
-    $ConnServers = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/connection-servers" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
+    $ConnServers = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/v2/connection-servers" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
     foreach ($cs in $ConnServers) {
         $name = $cs.name
         # General Horizon status
@@ -41,7 +41,7 @@ try {
             "NOT_RESPONDING" { $status = 2 }
             "UNKOWN" { $status = 3 }
         }
-        $csr.addChannel("$name Status", $status)
+        $csr.addChannel("$name Status", $status, @{ValueLookup="prtg.standardlookups.horizon.status";HideChart=$true;Primary=$true})
         
         # # connections
         $csr.addChannel("$name Connections", $cs.connection_count)
@@ -53,11 +53,23 @@ try {
                 "OK" { $replstatus = 0 }
                 "ERROR" { $replstatus = 1 }
             }
-            $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus)
+            $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus, @{ValueLookup="prtg.standardlookups.horizon.replstatus";HideChart=$true})
         }
 
-
+        # Gateway services status
+        foreach ($svc in $cs.services) {
+            switch ($svc.status) {
+                "UP" { $svcStatus = 0 }
+                "DOWN" { $svcStatus = 1 }
+                "UKNOWN" { $svcStatus = 99 }
+            }
+            $csr.addChannel("$name $($svc.service_name)", $svcStatus, @{ValueLookup="prtg.standardlookups.horizon.servicestatus";hideChart=$true})
+        }
         
+        # Certifiate status
+        if ($cs.certificate.valid) { $csr.addChannel("$name valid certificate", 1, @{ValueLookup="prtg.standardlookups.yesno.stateyesok"})}
+        else { $csr.addChannel("$name valid certificate", 2, @{ValueLookup="prtg.standardlookups.yesno.stateyesok"})}
+
     }
 
     #Log out of the API
@@ -69,6 +81,6 @@ try {
 }
 catch {
     $msg = "Errors occured while retrieving data from $HVUrl. Please check if all parameters are correct." 
-    $csr.Error($msg)
+    $csr.Error("$msg | $_")
     write-host $csr.result()
 }
