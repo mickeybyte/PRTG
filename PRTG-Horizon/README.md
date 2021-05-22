@@ -8,8 +8,11 @@ The scripts all use the Horizon-Functions.ps1 script
 In most scripts channels are created with a custom lookup value. The custom lookup files can be found [here](../PRTG-Lookups/)
 ## Overview
 Copy the powershell script(s) to the following location: <PRTG installation folder>\custom\exexml\ (this has to be done on each probe where you want to use this script)
+
 Download the [PRTG-CSRClass](../PRTG-CSR/) (not necessary if you'll adjust the scripts for another monitoring system)
+
 Download the Horizon-Functions.ps1 that contains common functions for all scripts (non-PRTG related functions)
+
 Download the [PRTG Custom Lookup files](../PRTG-Lookups/) 
 
 1. Create a new device in PRTG pointing to a Horizon Connection server (or the loadbalancer). 
