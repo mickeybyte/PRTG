@@ -8,23 +8,6 @@
 ##################################################################################################
 
 
-# class prtgChannel, contains the possible options for a channel
-class prtgChannel {
-    [ValidateNotNullOrEmpty()][string]$channel
-    [ValidateNotNullOrEmpty()][float]$value
-    [int]$Float=0
-    [string]$DecimalMode="Auto"
-    [string]$Unit="Custom"
-    [string]$CustomUnit="#"
-    [string]$SpeedSize="One"
-    [string]$VolumeSize="One"
-    [string]$SpeedTime="Second"
-    [int]$Warning=0
-    [int]$ShowChart=1
-    [int]$ShowTable=1
-    [string]$Mode="Absolute"
-}
-
 # class prtgCSR, contains a collection of prtgChannels and an optional text of error message to be returned
 #                contains functions to add a channel, set an error message and return a PRTG-valid JSON string
 class prtgCSR {
@@ -85,6 +68,10 @@ class prtgCSR {
         ###             DEFAULT = $false
         ###             hides the channel from the tables in PRTG
         ###
+        ###         [string]ValueLookup = string
+        ###             DEFAULT = "None"
+        ###             specifies the ValueLookup to be used in PRTG, only valid with Unit="Custom"
+        ###
         ###         [bool]Primary = $true | $false
         ###             DEFAULT = $false
         ###             specifies if this channel will be set as primary channel
@@ -113,7 +100,8 @@ class prtgCSR {
         $lValueMode = @("Absolute", "Difference") 
 
         # create new prtgChannel object and set its name
-        $newChannel = New-Object prtgChannel
+        #$newChannel = New-Object prtgChannel
+        $newChannel = @{}
         $newChannel.Channel = $cChannel
         
         # check if Float is specified. If not, value will be handled as integer
@@ -133,6 +121,13 @@ class prtgCSR {
                 }
             } else { $this.Error("Invalid Unit '$($cOptions["Unit"])' for channel '$($cChannel)'' specified") }
         }
+
+        # check if ValueLookup is specified. Only valid with ValueUnit="Custom"
+        if (-not ([string]::IsNullOrWhiteSpace($cOptions["ValueLookup"]))) {
+            $newChannel.ValueLookup = $cOptions["ValueLookup"]
+            $newChannel.Unit = "Custom"
+        }
+        
 
         # Check if SpeedSize is specified and if a correct value is given. If not return error.
         if (-not ([string]::IsNullOrWhiteSpace($cOptions["SpeedSize"]))) {
