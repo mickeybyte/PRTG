@@ -1,6 +1,6 @@
 # PRTG
 This repository consist of several scripts: 
-1. [PRTG Custom Sensor Result Powershell class](#prtg-custom-sensors-in-powershell)
+1. [PRTG Custom Sensor Result Powershell class](#PRTG-Custom-Sensor-Result-Powershell-class)
 2. [PRTG Custom Lookup files](#prtg-custom-lookup-files)
 3. [PRTG Custom sensor Powershell scripts for monitoring VMware Horizon](#prtg-custom-sensor-powershell-scripts-for-monitoring-vmware-horizon)
 ## PRTG Custom Sensor Result Powershell class
