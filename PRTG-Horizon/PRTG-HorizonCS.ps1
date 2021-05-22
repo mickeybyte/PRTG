@@ -56,8 +56,14 @@ try {
             $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus, @{ValueLookup="prtg.standardlookups.horizon.replstatus";HideChart=$true})
         }
 
-
-        
+        foreach ($svc in $cs.services) {
+            switch ($svc.status) {
+                "UP" { $svcStatus = 0 }
+                "DOWN" { $svcStatus = 1 }
+                "UKNOWN" { $svcStatus = 99 }
+            }
+            $csr.addChannel("$name $($svc.service_name)", $svcStatus, @{ValueLookup="prtg.standardlookups.horizon.servicestatus";hideChart=$true})
+        }
     }
 
     #Log out of the API
