@@ -12,7 +12,7 @@
 #                contains functions to add a channel, set an error message and return a PRTG-valid JSON string
 class prtgCSR {
     [System.Collections.ArrayList]$Channels = @()
-    [string]$Text=""
+    [string]$Text="OK"
     [string]$ErrorText=""
     [bool]$hasError=$false
 
