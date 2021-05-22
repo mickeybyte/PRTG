@@ -31,7 +31,7 @@ try {
     # Get API Access Token
     $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
     
-    $ConnServers = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/connection-servers" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
+    $ConnServers = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/v2/connection-servers" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
     foreach ($cs in $ConnServers) {
         $name = $cs.name
         # General Horizon status
@@ -56,6 +56,7 @@ try {
             $csr.addChannel("$name Replication with $($repl.server_name)", $replstatus, @{ValueLookup="prtg.standardlookups.horizon.replstatus";HideChart=$true})
         }
 
+        # Gateway services status
         foreach ($svc in $cs.services) {
             switch ($svc.status) {
                 "UP" { $svcStatus = 0 }
@@ -64,6 +65,11 @@ try {
             }
             $csr.addChannel("$name $($svc.service_name)", $svcStatus, @{ValueLookup="prtg.standardlookups.horizon.servicestatus";hideChart=$true})
         }
+        
+        # Certifiate status
+        if ($cs.certificate.valid) { $csr.addChannel("$name valid certificate", 1, @{ValueLookup="prtg.standardlookups.yesno.stateyesok"})}
+        else { $csr.addChannel("$name valid certificate", 2, @{ValueLookup="prtg.standardlookups.yesno.stateyesok"})}
+
     }
 
     #Log out of the API
