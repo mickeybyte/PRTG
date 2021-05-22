@@ -1,5 +1,14 @@
-﻿
+﻿##################################################################################################
+### PRTG-CSRClass.ps1
+###
+###     Defines the prtgCSR object, members and methods to output a PRTG validated JSON string.
+###
+###     The script is mostly based on the PRTG-provided python class "CustomSensorResult"
+###    
+##################################################################################################
 
+
+# class prtgChannel, contains the possible options for a channel
 class prtgChannel {
     [ValidateNotNullOrEmpty()][string]$channel
     [ValidateNotNullOrEmpty()][float]$value
@@ -16,6 +25,8 @@ class prtgChannel {
     [string]$Mode="Absolute"
 }
 
+# class prtgCSR, contains a collection of prtgChannels and an optional text of error message to be returned
+#                contains functions to add a channel, set an error message and return a PRTG-valid JSON string
 class prtgCSR {
     [System.Collections.ArrayList]$Channels = @()
     [string]$Text=""
