@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.domainstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        FULLY_ACCESSIBLE
+      </SingleInt>
+      <SingleInt state="Warning" value="2">
+        CANNOT_BIND
+      </SingleInt>
+      <SingleInt state="Error" value="1">
+        UNCONTACTABLE
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

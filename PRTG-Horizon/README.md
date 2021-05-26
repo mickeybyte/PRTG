@@ -25,6 +25,9 @@ You can also test the scripts by running them manually in powershell. You can ei
 ### Horizon-Functions.ps1
 This script contains some general functions that are used by all other scripts here. Put it in the same location where you put the other scripts.
 ### PRTG-HorizonCS.ps1
-This script shows the satus of the connection servers in your environment in a single sensor, using different channels
+This script shows the status of the connection servers in your environment in a single sensor, using different channels
 ![Connection server status 1](images/PRTG-HorizonCS_1.png)
-![Connection server status 1](images/PRTG-HorizonCS_2.png)
+![Connection server status 2](images/PRTG-HorizonCS_2.png)
+### PRTG-HorizonAD.ps1
+This script shows the AD domain status of the connection servers in your environment
+![Connection server AD domain status 1](images/PRTG-HorizonAD_1.png)
