@@ -31,6 +31,7 @@ try {
     # Get API Access Token
     $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
     
+    # If using Horizon 7.x (7.10+) remove the /v2 from the REST API URL below! 
     $ConnServers = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/v2/connection-servers" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
     foreach ($cs in $ConnServers) {
         $name = $cs.name

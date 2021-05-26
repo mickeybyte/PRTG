@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.eventdbstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        CONNECTED
+      </SingleInt>
+      <SingleInt state="Warning" value="1">
+        CONNECTING
+      </SingleInt>
+      <SingleInt state="Warning" value="2">
+        RECONNECTING
+      </SingleInt>
+      <SingleInt state="Error" value="3">
+        DISCONNECTED
+      </SingleInt>
+      <SingleInt state="Error" value="4">
+        ERROR
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        NOT_CONFIGURED
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

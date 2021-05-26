@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.domaintrust" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        PRIMARY_DOMAIN
+      </SingleInt>
+      <SingleInt state="Ok" value="1">
+        FROM_BROKER
+      </SingleInt>
+      <SingleInt state="Ok" value="2">
+        TO_BROKER
+      </SingleInt>
+      <SingleInt state="Ok" value="3">
+        TWO_WAY
+      </SingleInt>
+      <SingleInt state="Ok" value="4">
+        TWO_WAY_FOREST
+      </SingleInt>
+      <SingleInt state="Ok" value="5">
+        MANUAL
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>
