@@ -25,3 +25,5 @@ Download the [PRTG Custom Lookup files](../PRTG-Lookups/)
 This script contains some general functions that are used by all other scripts here. Put it in the same location where you put the other scripts.
 ### PRTG-HorizonCS.ps1
 This script shows the satus of the connection servers in your environment in a single sensor, using different channels
+![Connection server status 1](images/PRTG-HorizonCS_1.png)
+![Connection server status 1](images/PRTG-HorizonCS_2.png)
