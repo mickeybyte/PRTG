@@ -21,7 +21,7 @@ Download the [PRTG Custom Lookup files](../PRTG-Lookups/)
 4. Enter the necessary parameters. You can use PRTG placeholders: e.g. `-HVUrl https://%host -HVUser %windowsuser -HVPass %windowspassword -HVDomain %windowsdomain`    
   This wil take the values for user, password, host, ... from the information entered in PRTG on the sensor or parent group. Of course, you can also specify a fixed value in the parameters instead of using PRTG placeholders.
 
-You can also test the scripts by running them manually in powershell. You can either pass the parameters or just run it without parameters and you'll be prompted for the mandatory parameters.
+You can also test the scripts by running them manually in powershell and passing the necessary parameters (-HVUrl, -HVUser, -HVPass & -HVDomain)
 
 There's an option to store the password in a secure way and retrieve it by the scripts in stead of passing it as a parameter each time you run the script. This can be done by: 
 1. In the sensor settings, enter the password as a parameter and also provide the -SavePassword switch: `-HVUrl https://%host -HVUser %windowsuser -HVDomain %windowsdomain -HVPass %windowspassword -SavePassword`
