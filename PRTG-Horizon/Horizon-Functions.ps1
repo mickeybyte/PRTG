@@ -170,22 +170,26 @@
         try { 
             # do REST API call to check if access token still valid
             $test = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/ad-domains" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
-            $csr.Text = "Auth: OK"
+            #$csr.Text = "Auth: OK"
         } Catch {
             # unauthorized, get new access token using refresh token
             try {
                 $accessToken = Update-HRConnection -url $HVUrl -accessToken $accessToken
-                $csr.Text = "Auth: Refreshed"
+                #$csr.Text = "Auth: Refreshed"
                 # if SaveToken, store new tokens
-                if ($SaveToken) { Update-AccessToken -accessToken $accessToken -secureFile $SecureFile
-                    $csr.Text += " & saved" }
+                if ($SaveToken) { 
+                    Update-AccessToken -accessToken $accessToken -secureFile $SecureFile
+                    #$csr.Text += " & saved" 
+                }
             } Catch {
                 # refresh failed, start login to obtain new access token
                 try {
                     $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
-                    $csr.Text = "Auth: New token"
-                    if ($SaveToken) { Update-AccessToken -accessToken $accessToken -secureFile $SecureFile 
-                        $csr.Text += " & saved"}
+                    #$csr.Text = "Auth: New token"
+                    if ($SaveToken) { 
+                        Update-AccessToken -accessToken $accessToken -secureFile $SecureFile 
+                        #$csr.Text += " & saved"
+                    }
                 } catch {
                     # all re-authentication methods failed, raise error and exit
                     $csr.Error("Failed to authenticate: $($_.Exception.Response.StatusDescription)")
