@@ -136,7 +136,7 @@
         }
     }
 
-    # Process input parameters
+    # Process input parameters, store password if needed and retrieve access tokens
     function process-Parameters() {
         if ($SavePassword) {
             # if -SavePassword is given, only save password and exit. No monitoring is done!
