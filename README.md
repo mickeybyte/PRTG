@@ -12,4 +12,4 @@ Those .ovl files must be placed in your PRTG installation folder under lookups\c
 You can find the files [here](PRTG-Lookups/)
 ## PRTG Custom sensor Powershell scripts for monitoring VMware Horizon
 A collection of powershell scripts to monitor your VMware Horizon environment with PRTG. 
-More information can be found [here](PRTG-Horizon/README.md)
+More information can be found [here](PRTG-Horizon/)
