@@ -12,10 +12,13 @@
 # Specify default values here or use command line parameters. 
 # If nothing is specified, you will be prompted for mandatory parameters
 param (
-    [Parameter(Mandatory)][string]$HVUrl,       
-    [Parameter(Mandatory)][string]$HVUser,      
-    [Parameter(Mandatory)][string]$HVPass,      
-    [Parameter(Mandatory)][string]$HVDomain     
+    [string]$HVUrl,         # Horizon connection server URL (https://connectionserver.domain.local)
+    [string]$HVUser,        # Horizon administrator user with access to root level
+    [string]$HVPass="",     # Horizon password (if empty it will be retrieved form secure file)
+    [string]$HVDomain,      # Horizon AD domain
+    [bool]$SaveToken=$true, # API authentication token is saved to secure file to be re-used by this or other Horizon scripts
+    [switch]$SavePassword=$false,   # If true, password will be saved to secure file (only to be used once to save password)
+    [string]$SecureFile="$PSScriptRoot\Horizon-Functions.dat"   # secure file used to save or retrieve password and/or authentication token
 )
 
 # Import scripts containing general functions and classes
@@ -28,11 +31,11 @@ try {
     # Create prtgCSR object
     $csr = New-Object prtgCSR
 
-    # Get API Access Token
-    $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
-    
-    # If using Horizon 7.x (7.10+) remove the /v2 from the REST API URL below! 
-    $adDomains = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/v2/ad-domains" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
+    # process parameters and initialize authentication
+    $accessToken = process-Parameters
+
+    # Get AD Domain status from Horizon
+    $adDomains = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/ad-domains" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
     foreach ($domain in $adDomains) {
         
         foreach ($cs in $domain.connection_servers) {
@@ -60,14 +63,9 @@ try {
         }
     }
 
-    #Log out of the API
-    Close-HRConnection $accessToken $HVUrl
-
     # write PRTG JSON output
     write-host $csr.result()
-
-}
-catch {
+} catch {
     $msg = "Errors occured while retrieving data from $HVUrl. Please check if all parameters are correct." 
     $csr.Error("$msg | $_")
     write-host $csr.result()
