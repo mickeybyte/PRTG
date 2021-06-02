@@ -119,7 +119,7 @@
 
             # Test if password is correct
             try {
-                $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
+                $accessToken = Open-HRConnection -username $HVUser -password $pass -domain $HVDomain -url $HVUrl
                 $data.password = $pass
                 if ($SaveToken) {
                     $data.accessToken = $accessToken.access_token
@@ -174,21 +174,23 @@
         } Catch {
             # unauthorized, get new access token using refresh token
             try {
+                $refreshT = $accessToken.refresh_token #save refresh token
                 $accessToken = Update-HRConnection -url $HVUrl -accessToken $accessToken
-                #$csr.Text = "Auth: Refreshed"
+                # $csr.Text = "Auth: Refreshed"
                 # if SaveToken, store new tokens
                 if ($SaveToken) { 
-                    Update-AccessToken -accessToken $accessToken -secureFile $SecureFile
-                    #$csr.Text += " & saved" 
+                    $newTokens = @{access_token = $accessToken.access_token; refresh_token = $refreshT}
+                    Update-AccessToken -accessToken $newTokens -secureFile $SecureFile
+                    # $csr.Text += " & saved" 
                 }
             } Catch {
                 # refresh failed, start login to obtain new access token
                 try {
                     $accessToken = Open-HRConnection -username $HVUser -password $HVPass -domain $HVDomain -url $HVUrl
-                    #$csr.Text = "Auth: New token"
+                    # $csr.Text = "Auth: New token"
                     if ($SaveToken) { 
-                        Update-AccessToken -accessToken $accessToken -secureFile $SecureFile 
-                        #$csr.Text += " & saved"
+                        Update-AccessToken -accessToken $accessToken -secureFile $SecureFile
+                        # $csr.Text += " & saved"
                     }
                 } catch {
                     # all re-authentication methods failed, raise error and exit
