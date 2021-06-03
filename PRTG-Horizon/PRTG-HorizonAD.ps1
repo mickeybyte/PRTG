@@ -45,7 +45,7 @@ try {
                 "FULL_ACCESSIBLE" { $status = 0 }
                 "UNCONTACTABLE" { $status = 1 }
                 "CANNOT_BIND" { $status = 2 }
-                "UNKOWN" { $status = 99 }
+                "UNKNOWN" { $status = 99 }
             }
             $csr.addChannel("Status $($domain.dns_name) - $($cs.name)", $status, @{ValueLookup="prtg.standardlookups.horizon.domainstatus";HideChart=$true;Primary=$true})
             
@@ -57,7 +57,7 @@ try {
                 "TWO_WAY" { $status = 3 }
                 "TWO_WAY_FOREST" { $status = 4 }
                 "MANUAL" { $status = 5 }
-                "UNKOWN" { $status = 99 }
+                "UNKNOWN" { $status = 99 }
             }
             $csr.addChannel("Trust relation $($domain.dns_name) - $($cs.name)", $status, @{ValueLookup="prtg.standardlookups.horizon.domaintrust";HideChart=$true})
         }

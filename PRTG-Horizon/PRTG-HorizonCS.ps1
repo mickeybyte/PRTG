@@ -42,7 +42,7 @@ try {
             "OK" { $status = 0 }
             "ERROR" { $status = 1 }
             "NOT_RESPONDING" { $status = 2 }
-            "UNKOWN" { $status = 3 }
+            "UNKNOWN" { $status = 3 }
         }
         $csr.addChannel("$name Status", $status, @{ValueLookup="prtg.standardlookups.horizon.status";HideChart=$true;Primary=$true})
         
