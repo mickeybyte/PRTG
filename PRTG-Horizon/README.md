@@ -1,5 +1,7 @@
 # PRTG Powershell scripts to monitor VMware Horizon environment
-Here's a collection of powershell scripts that you can you as PRTG Custom sensors to monitor your VMware Horizon environment
+Here's a collection of powershell scripts that you can you as PRTG Custom sensors to monitor your VMware Horizon environment. 
+
+If you don't use PRTG for monitoring, you should be able to use the scripts by adjusting them to output the data in the correct format for you monitoring system.
 ## REQUIREMENTS
 The scripts all use the [PRTG-CSRClass](../PRTG-CSR/) script to generate the correct PRTG JSON string
 
@@ -13,7 +15,7 @@ Download the [PRTG-CSRClass](../PRTG-CSR/) (not necessary if you'll adjust the s
 
 Download the Horizon-Functions.ps1 that contains common functions for all scripts (non-PRTG related functions)
 
-Download the [PRTG Custom Lookup files](../PRTG-Lookups/) 
+Download the [PRTG Custom Lookup files](../PRTG-Lookups/) (not necessary if you don't use PRTG for monitoring)
 
 1. Create a new device in PRTG pointing to a Horizon Connection server (or the loadbalancer). 
 2. Add a new sensor: "EXE/Script advanced"
@@ -48,3 +50,9 @@ This script shows the AD domain status of the connection servers in your environ
 This script shows the status of the event database in your environment
 
 ![Connection server AD domain status 1](images/PRTG-HorizonEventDB_1.png)
+#### PRTG-HorizonRDS.ps1
+This script shows the status of the RDS Farms and servers in your environment in a single sensor, using different channels
+
+![RDS Farm status 1](images/PRTG-HorizonRDS_1.png)
+
+![RDS Farm status 2](images/PRTG-HorizonRDS_2.png)
