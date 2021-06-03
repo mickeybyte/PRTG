@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.rdsloadstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        LIGHT
+      </SingleInt>
+      <SingleInt state="Ok" value="1">
+        NORMAL
+      </SingleInt>
+      <SingleInt state="Ok" value="2">
+        HEAVY
+      </SingleInt>
+      <SingleInt state="Ok" value="3">
+        BLOCK
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

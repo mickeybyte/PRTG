@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.gwstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        OK
+      </SingleInt>
+      <SingleInt state="Error" value="1">
+        PROBLEM
+      </SingleInt>
+      <SingleInt state="Warning" value="2">
+        NOT_CONTACTED
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

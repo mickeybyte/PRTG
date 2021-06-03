@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.rdsagentstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        AVAILABLE
+      </SingleInt>
+      <SingleInt state="Ok" value="1">
+        DISABLED
+      </SingleInt>
+      <SingleInt state="Ok" value="2">
+        CONNECTED
+      </SingleInt>
+      <SingleInt state="Warning" value="3">
+        WAIT_FOR_AGENT
+      </SingleInt>
+      <SingleInt state="Warning" value="4">
+        DISABLE_IN_PROGRESS
+      </SingleInt>
+      <SingleInt state="Warning" value="5">
+        PROVISIONING
+      </SingleInt>
+      <SingleInt state="Warning" value="6">
+        CUSTOMIZING
+      </SingleInt>
+      <SingleInt state="Warning" value="7">
+        DELETING
+      </SingleInt>
+      <SingleInt state="Warning" value="8">
+        MAINTENANCE
+      </SingleInt>
+      <SingleInt state="Warning" value="9">
+        PROVISIONED
+      </SingleInt>
+      <SingleInt state="Warning" value="10">
+        DISCONNECTED
+      </SingleInt>
+      <SingleInt state="Warning" value="11">
+        AGENT_ERR_STARTUP_IN_PROGRESS
+      </SingleInt>
+      <SingleInt state="Warning" value="12">
+        AGENT_DRAIN_MODE
+      </SingleInt>
+      <SingleInt state="Warning" value="13">
+        AGENT_DRAIN_UNTIL_RESTART
+      </SingleInt>
+      <SingleInt state="Warning" value="14">
+        IN_PROGRESS
+      </SingleInt>
+      <SingleInt state="Warning" value="15">
+        VALIDATING
+      </SingleInt>
+      <SingleInt state="Error" value="16">
+        AGENT_UNREACHABLE
+      </SingleInt>
+      <SingleInt state="Error" value="17">
+        AGENT_CONFIG_ERROR
+      </SingleInt>
+      <SingleInt state="Error" value="18">
+        PROVISIONING_ERROR
+      </SingleInt>
+      <SingleInt state="Error" value="19">
+        ERROR
+      </SingleInt>
+      <SingleInt state="Error" value="20">
+        AGENT_ERR_DISABLED
+      </SingleInt>
+      <SingleInt state="Error" value="21">
+        AGENT_ERR_INVALID_IP
+      </SingleInt>
+      <SingleInt state="Error" value="22">
+        AGENT_ERR_NEED_REBOOT
+      </SingleInt>
+      <SingleInt state="Error" value="23">
+        AGENT_ERR_PROTOCOL_FAILURE
+      </SingleInt>
+      <SingleInt state="Error" value="24">
+        AGENT_ERR_DOMAIN_FAILURE
+      </SingleInt>
+      <SingleInt state="Error" value="25">
+        ALREADY_USED
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

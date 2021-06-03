@@ -1,7 +1,7 @@
 ###################################################################################################
-### PRTG-HorizonAD.ps1
+### PRTG-HorizonGW.ps1
 ###
-###     Shows the status of the AD Domain for the connection servers in your Horizon environment
+###     Shows the status of the gateways in your Horizon environment, using a single sensor with different channels
 ###
 ### Parts of this script grabbed from 
 ###    https://www.retouw.nl/2020/05/15/horizonapi-getting-started-with-the-horizon-rest-api/
@@ -33,36 +33,29 @@ try {
 
     # process parameters and initialize authentication
     $accessToken = process-Parameters
-
-    # Get AD Domain status from Horizon
-    $adDomains = Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/ad-domains" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
-    foreach ($domain in $adDomains) {
+    
+    $gateways =  Invoke-RestMethod -Method Get -uri "$HVurl/rest/monitor/gateways" -ContentType "application/json" -Headers (Get-HRHeader -accessToken $accessToken)
+    
+    foreach ($gw in $gateways) {
         
-        foreach ($cs in $domain.connection_servers) {
-            
-            # AD Domain status for connection server
-            switch ($cs.status) {
-                "FULL_ACCESSIBLE" { $status = 0 }
-                "UNCONTACTABLE" { $status = 1 }
-                "CANNOT_BIND" { $status = 2 }
-                "UNKNOWN" { $status = 99 }
-            }
-            $csr.addChannel("Status $($domain.dns_name) - $($cs.name)", $status, @{ValueLookup="prtg.standardlookups.horizon.domainstatus";HideChart=$true;Primary=$true})
-            
-            # AD Domain trust status
-            switch ($cs.trust_relationship) {
-                "PRIMARY_DOMAIN" { $status = 0 }
-                "FROM_BROKER" { $status = 1 }
-                "TO_BROKER" { $status = 2 }
-                "TWO_WAY" { $status = 3 }
-                "TWO_WAY_FOREST" { $status = 4 }
-                "MANUAL" { $status = 5 }
-                "UNKNOWN" { $status = 99 }
-            }
-            $csr.addChannel("Trust relation $($domain.dns_name) - $($cs.name)", $status, @{ValueLookup="prtg.standardlookups.horizon.domaintrust";HideChart=$true})
+        $name = $gw.name
+        # General status
+        switch ($gw.status) {
+            "OK" { $status = 0 }
+            "PROBLEM" { $status = 1 }
+            "NOT_CONTACTED" { $status = 2 }
+            "UNKNOWN" { $status = 99 }
         }
-    }
+        $csr.addChannel("$name", $status, @{ValueLookup="prtg.standardlookups.horizon.gwstatus";HideChart=$true;Primary=$true})
+        
+        # # connections
+        $csr.addChannel("$name Active connections", $gw.active_connection_count)
+        # # BLAST connections
+        $csr.addChannel("$name BLAST connections", $gw.blast_connection_count)
+        # # PCoIP connections
+        $csr.addChannel("$name PCoIP connections", $gw.pcoip_connection_count)
 
+    }
     # write PRTG JSON output
     write-host $csr.result()
 } catch {
