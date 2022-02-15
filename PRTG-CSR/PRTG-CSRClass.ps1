@@ -214,7 +214,7 @@ class prtgCSR {
 {
     "prtg": {
         "text": "$($this.Text)",
-        "result": $($this.Channels | ConvertTo-Json)
+        "result": $(ConvertTo-Json @($this.Channels))
     }
 }
 "@
