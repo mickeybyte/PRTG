@@ -39,6 +39,7 @@ try {
     foreach ($sa in $SAMLAuths) {
         
         $name = $sa.details.label
+        $csr.addChannel("$name - # enabled servers", $sa.connection_servers.Count, @{HideChart=$true})
         foreach($cs in $sa.connection_servers) {
             # SAML status
             switch ($cs.status) {
