@@ -57,10 +57,14 @@ This script shows the status of the RDS Farms and servers in your environment in
 
 ![RDS Farm status 2](images/PRTG-HorizonRDS_2.png)
 #### PRTG-HorizonGW.ps1
-This script shows the status of the gateways your Horizon environment in a single sensor, using different channels
+This script shows the status of the Unified Access Gateways your Horizon environment in a single sensor, using different channels
 
-![RDS Gateway status](images/PRTG-HorizonGW_1.png)
+![UAG status](images/PRTG-HorizonGW_1.png)
 #### PRTG-HorizonSAML.ps1
 This script shows the status of the SAML Authenticators in your Horizon environment
 
-![SAML AUthenticators status](images/PRTG-HorizonSAML_1.png)
+![SAML Authenticators status](images/PRTG-HorizonSAML_1.png)
+#### PRTG-HorizonTrueSSO.ps1
+This script shows the status of the TrueSSO configuration in your Horizon environment
+
+![TrueSSO Configuration status](images/PRTG-HorizonTrueSSO_1.png)
