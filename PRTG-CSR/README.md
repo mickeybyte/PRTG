@@ -7,7 +7,7 @@ $csr.addChannel("Channel 1", 16)
 $csr.addChannel("Channel 2", 26.36, @{Primary=$true; Float=$true; Unit="Percent"})
 write-host $csr.result()
 ```
-If you want te return an error state to PRTG, use the prtgCSR.error(string) function
+If you want to return an error state to PRTG, use the prtgCSR.error(string) function
 ```
 ...
 $csr.Error("An error occured retrieving the value")
