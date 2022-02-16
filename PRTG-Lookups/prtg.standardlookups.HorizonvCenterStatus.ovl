@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+  <ValueLookup id="prtg.standardlookups.horizon.vcenterstatus" desiredValue="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PaeValueLookup.xsd">
+    <Lookups>
+      <SingleInt state="Ok" value="0">
+        OK
+      </SingleInt>
+      <SingleInt state="Warning" value="1">
+        RECONNECTING
+      </SingleInt>
+      <SingleInt state="Error" value="2">
+        DOWN
+      </SingleInt>
+      <SingleInt state="Error" value="3">
+        CANNOT_LOGIN
+      </SingleInt>
+      <SingleInt state="Error" value="4">
+        INVALID_CREDENTIALS
+      </SingleInt>
+      <SingleInt state="None" value="90">
+        NOT_YET_CONNECTED
+      </SingleInt>
+      <SingleInt state="None" value="99">
+        UNKNOWN
+      </SingleInt>
+    </Lookups>
+  </ValueLookup>

@@ -68,3 +68,7 @@ This script shows the status of the SAML Authenticators in your Horizon environm
 This script shows the status of the TrueSSO configuration in your Horizon environment
 
 ![TrueSSO Configuration status](images/PRTG-HorizonTrueSSO_1.png)
+#### PRTG-HorizonvCenter.ps1
+This script shows the status of the vCenter configuration in your Horizon environment
+
+![TrueSSO Configuration status](images/PRTG-HorizonvCenter_1.png)
