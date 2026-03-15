@@ -1,4 +1,6 @@
-# PRTG
+# [ARCHIVED] PRTG
+> This repository is no longer maintained and stays here to be publicly available. Feel free to keep using it or adjust, but due to other activities, I'm no longer able to maintain this, nor guarantee that it works on recent versions of PRTG or Horizon.
+>
 This repository consist of several scripts: 
 1. [PRTG Custom Sensor Result Powershell class](#PRTG-Custom-Sensor-Result-Powershell-class)
 2. [PRTG Custom Lookup files](#prtg-custom-lookup-files)
